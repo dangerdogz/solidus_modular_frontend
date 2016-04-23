@@ -1,7 +1,37 @@
 <html>
 <head>
+  <title><%= current_store.name %></title>
 </head>
 <body>
-  <%= yield %>
+<table width='100%'>
+  <tr>
+    <td colspan='2'>
+      <center>
+        <b><%= current_store.name %></b>
+      </center>
+    </td>
+  </tr>
+  <tr>
+    <td width='200'>
+      <ul>
+        <% Spree::Taxonomy.includes(
+          root: { children: :children }
+        ).find_by(name: 'Categories').root.children.each do |taxon| %>
+          <li><%= link_to taxon.name, taxon %></li>
+          <% if taxon.children.any? %>
+            <ul>
+              <% taxon.children.each do |child| %>
+                <li><%= link_to child.name, child %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        <% end %>
+      </ul>
+    </td>
+    <td>
+      <%= yield %>
+    </td>
+  </tr>
+</table>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<h1><%= @product.name %></h1>
+
+<%= image_tag @product.display_image.attachment(:large) %>
+
+<p><%= @product.description %></p>
+
+<h3><%= @product.display_price %></h3>
+
+<%= form_tag add_cart_path do %>
+  <% if @product.variants.any? %>
+    <% @product.variants.each_with_index do |variant, index| %>
+      <%= radio_button_tag :variant_id, variant.id, index.zero? %>
+      <%= variant.options_text %><br>
+    <% end %>
+  <% else %>
+    <%= hidden_field_tag :variant_id, @product.master.id %>
+  <% end %>
+  <p>
+  Quantity: <%= text_field_tag :quantity, 1 %>
+  </p>
+
+  <input type='submit'>
+<% end %>

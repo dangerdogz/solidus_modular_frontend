@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
+  s.add_dependency "solidus_auth_devise"
   s.add_dependency "solidus_core", [">= 1.2.0", "< 2"]
 
   s.add_development_dependency "rspec", [">= 3.4.0", "< 4"]

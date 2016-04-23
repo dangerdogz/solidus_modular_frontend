@@ -1,0 +1,17 @@
+<h1><%= @taxon.name %></h1>
+
+<table width='100%'>
+  <% @taxon.products.each do |product| %>
+    <tr>
+      <td>
+        <%= image_tag(product.display_image.attachment(:small)) %>
+      </td>
+      <td>
+        <%= link_to product.name, product %>
+      </td>
+      <td>
+        <%= product.display_price %>
+      </td>
+    </tr>
+  <% end %>
+</table>
