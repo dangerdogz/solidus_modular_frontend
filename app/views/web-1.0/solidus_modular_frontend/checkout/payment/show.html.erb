@@ -1,0 +1,15 @@
+<h1>Payment</h1>
+
+<% Spree::PaymentMethod.available(:frontend).each do |payment_method| %>
+  <h2>Pay by <%= payment_method.name %></h2>
+  <%= form_tag checkout_payment_path, method: :put do %>
+    <%=
+      render(
+        partial: payment_method.type.demodulize.underscore,
+        locals: { payment_method: payment_method }
+      )
+    %>
+    <%= submit_tag %>
+  <% end %>
+  <br>
+<% end %>

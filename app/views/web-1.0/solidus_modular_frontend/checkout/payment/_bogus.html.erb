@@ -1,0 +1,22 @@
+<table>
+  <tr>
+    <td>Name on CC</td>
+    <td><%= text_field_tag "payment_method[#{payment_method.id}][name]" %></td>
+  </tr>
+  <tr>
+    <td>Number</td>
+    <td><%= text_field_tag "payment_method[#{payment_method.id}][number]" %></td>
+  </tr>
+  <tr>
+    <td>Expiry Month</td>
+    <td><%= text_field_tag "payment_method[#{payment_method.id}][month]" %></td>
+  </tr>
+  <tr>
+    <td>Expiry Year</td>
+    <td><%= text_field_tag "payment_method[#{payment_method.id}][year]" %></td>
+  </tr>
+  <tr>
+    <td>CVV</td>
+    <td><%= text_field_tag "payment_method[#{payment_method.id}][verification_value]" %></td>
+  </tr>
+</table>

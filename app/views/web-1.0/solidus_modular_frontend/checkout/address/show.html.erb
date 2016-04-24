@@ -1,0 +1,47 @@
+<h1>Set Addresses</h1>
+
+<%= form_for [:checkout, @shipping_address], url: checkout_address_path do |f| %>
+  <table>
+    <%
+      %i(
+        firstname
+        lastname
+        address1
+        address2
+        city
+        zipcode
+        phone
+      ).each do |column|
+    %>
+      <tr>
+        <td><%= Spree::Address.human_attribute_name(column) %></td>
+        <td><%= f.text_field column %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><%= Spree::Address.human_attribute_name(:state_id) %></td>
+      <td>
+        <%=
+          f.select(
+            :state_id,
+            Spree::State.all.map { |state| [state.name, state.id] }
+          )
+        %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= Spree::Address.human_attribute_name(:country_id) %></td>
+      <td>
+        <%=
+          f.select(
+            :country_id,
+            Spree::Country.order(:name).all.map do |country|
+              [country.name, country.id]
+            end
+          )
+        %>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit %>
+<% end %>

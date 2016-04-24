@@ -1,0 +1,15 @@
+<h1>Shipping</h1>
+
+<%= form_tag checkout_delivery_path, method: :put do %>
+  <% @order.shipments.each do |shipment| %>
+    <h3><%= shipment.number %></h3>
+    <% shipment.shipping_rates.each do |rate| %>
+      <%= radio_button_tag "shipment[#{shipment.id}]", rate.id, rate.selected? %>
+      <%= rate.shipping_method.name %>
+      <%= rate.display_price %>
+      <br>
+    <% end %>
+  <% end %>
+
+  <%= submit_tag %>
+<% end %>
