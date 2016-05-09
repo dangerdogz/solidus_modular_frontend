@@ -34,11 +34,13 @@ SolidusModularFrontend::Engine.routes.draw do
       controller: config_template(:confirm, :checkout),
       only: %i(show create)
     )
-    resource(
-      :complete,
-      controller: config_template(:complete, :checkout),
-      only: %i(show)
-    )
+    resources :order, only: [] do
+      resource(
+        :complete,
+        controller: config_template(:complete, :checkout),
+        only: %i(show)
+      )
+    end
   end
 
   root to: "#{config_template(:home)}#index"

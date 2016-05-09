@@ -14,6 +14,9 @@ module SolidusModularFrontend
         @billing_address = @order.billing_address || Spree::Address.new
         @shipping_address = @order.shipping_address || Spree::Address.new
         @order.next! if @order.state == 'cart'
+        fail(
+          OrderNotInStateError.new('address', @order.state)
+        ) unless @order.address?
       end
 
       # FIXME: Add some basic error handling

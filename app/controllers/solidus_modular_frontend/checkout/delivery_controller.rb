@@ -3,6 +3,12 @@ require_dependency "solidus_modular_frontend/checkout/checkout_controller"
 module SolidusModularFrontend
   module Checkout
     class DeliveryController < CheckoutController
+      before_action do
+        fail(
+          OrderNotInStateError.new('delivery', @order.state)
+        ) unless @order.delivery?
+      end
+
       def show
       end
 

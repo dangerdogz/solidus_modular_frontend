@@ -3,6 +3,12 @@ require_dependency "solidus_modular_frontend/checkout/checkout_controller"
 module SolidusModularFrontend
   module Checkout
     class ConfirmController < CheckoutController
+      before_action do
+        fail(
+          OrderNotInStateError.new('confirm', @order.state)
+        ) unless @order.confirm?
+      end
+
       def show
       end
 

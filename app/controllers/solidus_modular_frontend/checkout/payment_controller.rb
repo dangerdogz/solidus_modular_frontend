@@ -3,6 +3,12 @@ require_dependency "solidus_modular_frontend/checkout/checkout_controller"
 module SolidusModularFrontend
   module Checkout
     class PaymentController < CheckoutController
+      before_action do
+        fail(
+          OrderNotInStateError.new('payment', @order.state)
+        ) unless @order.payment?
+      end
+
       def show
       end
 
